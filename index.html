@@ -43,15 +43,6 @@
     margin:12px 0;
     box-shadow:0 4px 10px rgba(0,0,0,0.15);
   }
-  #cardText{
-    background:#fff;
-    padding:20px;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.2);
-    max-width:500px;
-    text-align:center;
-    margin-bottom:15px;
-  }
   .content{
     display:flex;
     flex-direction:column;
@@ -59,46 +50,82 @@
     justify-content:center;
   }
 
-  /* Mini reproductor flotante tipo notificación */
+  /* Carta scroll si es muy larga */
+  #cardText{
+    background:#fff;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    max-width:500px;
+    max-height:400px;
+    text-align:center;
+    margin-bottom:15px;
+    overflow-y:auto;
+  }
+
+  /* Mini reproductor flotante más compacto con botón circular */
   #musicPlayer{
     display:none;
     position:fixed;
     top:15px;
     right:15px;
     background:#fff;
-    padding:15px 20px;
+    padding:10px 15px;
     border-radius:12px;
     box-shadow:0 6px 20px rgba(0,0,0,0.3);
     z-index:999;
-    width:300px;
+    width:250px;
     display:flex;
     flex-direction:column;
     align-items:center;
+    gap:8px;
+  }
+
+  #musicPlayer span{
+    font-size:14px;
+    text-align:center;
+  }
+
+  #progressWrapper{
+    display:flex;
+    align-items:center;
     gap:10px;
-  }
-  #musicPlayer img{
-    width:50px;
-    height:50px;
-    border-radius:8px;
-    object-fit:cover;
-  }
-  #progressContainer{
     width:100%;
+  }
+
+  #playPauseBtn{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:none;
+    background:#ff6b9a;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+
+  #progressContainer{
+    flex:1;
     background:#ddd;
-    height:16px;
-    border-radius:8px;
-    margin:5px 0;
+    height:10px;
+    border-radius:5px;
     cursor:pointer;
   }
   #progress{
     background:#ff6b9a;
     height:100%;
     width:0%;
-    border-radius:8px;
+    border-radius:5px;
   }
+
   #timeDisplay{
     font-size:12px;
     color:#333;
+    margin-top:3px;
   }
 </style>
 </head>
@@ -137,7 +164,7 @@
     <div id="cardText">
       <p>Mi niñita linda,</p>
       <p>
-       Hoy quise crear esto solo para ti. Cada día contigo es un regalo, 
+        Hoy quise crear esto solo para ti. Cada día contigo es un regalo, 
       y no importa lo que pase, siempre serás mi razón favorita para sonreír.
       Y bueno, quiero aprovechar esta carta para ser totalmente sincera contigo.
       Sé que no estás en tu mejor momento y que las cosas en tu casa te pesan mucho, y lo entiendo. No me imagino lo difícil que debe ser para ti, pero quiero que sepas que no estás sola. No quiero que pienses que tus problemas son una carga para mí o que me estás perjudicando, porque no es así. Al contrario, me duele verte mal y lo único que quiero es poder estar a tu lado, escucharte, acompañarte y darte el apoyo que necesites, aunque sea solo con mi presencia o mis palabras.
@@ -155,13 +182,14 @@
   <button onclick="startOver()">Start Over</button>
 </div>
 
-<!-- Mini reproductor flotante tipo notificación -->
+<!-- Mini reproductor flotante compacto con botón circular -->
 <div id="musicPlayer">
-  <img src="images/Mitsukiyaya.jpg" alt="Foto canción">
   <span>🎵 Esta canción es para ti 💗</span>
-  <button id="playPauseBtn">⏸️</button>
-  <div id="progressContainer" onclick="setProgress(event)">
-    <div id="progress"></div>
+  <div id="progressWrapper">
+    <button id="playPauseBtn">⏸️</button>
+    <div id="progressContainer" onclick="setProgress(event)">
+      <div id="progress"></div>
+    </div>
   </div>
   <div id="timeDisplay">0:00 / 0:00</div>
 </div>
@@ -238,6 +266,8 @@ function setProgress(e){
 
 </body>
 </html>
+
+
 
 
 
